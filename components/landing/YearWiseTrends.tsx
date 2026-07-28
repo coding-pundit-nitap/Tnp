@@ -34,12 +34,12 @@ export default function YearWiseTrends() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
           viewport={{ once: true }}
-          className="mt-10 flex flex-wrap items-center justify-center gap-3"
+          className="mt-10 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center sm:justify-center sm:gap-3"
         >
           {highlights.map((h) => (
             <span
               key={h.label}
-              className="inline-flex items-center gap-2 rounded-full border border-navy/20 bg-navy/5 px-4 py-2 text-[13px] font-semibold text-navy"
+              className="inline-flex items-center justify-center gap-1.5 rounded-full border border-navy/20 bg-navy/5 px-3 py-2 text-[12px] sm:text-[13px] font-semibold text-navy sm:px-4"
             >
               {h.label}: <span className="font-bold">{h.value}</span>
             </span>
@@ -47,7 +47,7 @@ export default function YearWiseTrends() {
         </motion.div>
 
         {/* Year cards */}
-        <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
+        <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
           {yearData.map((d, i) => (
             <motion.div
               key={d.year}
@@ -55,9 +55,9 @@ export default function YearWiseTrends() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.06, duration: 0.4, ease: "easeOut" }}
               viewport={{ once: true }}
-              className={`relative flex flex-col items-center rounded-2xl border p-6 text-center shadow-soft transition-all duration-300 hover:shadow-soft-hover ${
+              className={`relative flex flex-col items-center rounded-2xl border p-5 sm:p-6 text-center shadow-soft transition-all duration-300 hover:shadow-soft-hover ${
                 d.highlight
-                  ? "border-navy bg-navy text-white"
+                  ? "col-span-2 sm:col-span-1 border-navy bg-navy text-white"
                   : "border-line bg-surface hover:bg-[#f8faff]"
               }`}
             >
@@ -74,7 +74,7 @@ export default function YearWiseTrends() {
                 {d.year}
               </p>
               <p
-                className={`mt-3 text-[32px] font-bold tabular-nums leading-none ${
+                className={`mt-3 text-[28px] sm:text-[32px] font-bold tabular-nums leading-none ${
                   d.highlight ? "text-white" : "text-ink"
                 }`}
               >

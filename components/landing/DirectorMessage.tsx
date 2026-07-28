@@ -21,25 +21,25 @@ export default function DirectorMessage() {
           className="mt-14 grid overflow-hidden rounded-2xl border border-line bg-surface shadow-soft lg:grid-cols-3"
         >
           {/* Director photo + info */}
-          <div className="flex flex-col items-center justify-center bg-navy p-8 text-center lg:p-10">
-            <div className="h-32 w-32 overflow-hidden rounded-full border-4 border-white/20">
+          <div className="flex flex-col items-center justify-center bg-navy p-6 text-center sm:p-8 lg:p-10">
+            <div className="h-24 w-24 overflow-hidden rounded-full border-4 border-white/20 sm:h-32 sm:w-32">
               <img
                 src="https://res.cloudinary.com/dniihkck2/image/upload/v1749371321/310243512_misgnm.jpg"
                 alt="Prof. Mohan V Aware"
                 className="h-full w-full object-cover"
               />
             </div>
-            <h3 className="mt-5 text-lg font-bold text-white">
+            <h3 className="mt-4 text-base font-bold text-white sm:mt-5 sm:text-lg">
               Prof. Mohan V Aware
             </h3>
-            <p className="mt-1 text-sm text-white/70">
+            <p className="mt-1 text-xs text-white/70 sm:text-sm">
               Director, NIT Arunachal Pradesh
             </p>
           </div>
 
           {/* Message content */}
-          <div className="p-8 sm:p-10 lg:col-span-2">
-            <p className="text-[15px] leading-7 text-ink-soft">
+          <div className="p-6 sm:p-8 lg:col-span-2 lg:p-10">
+            <p className="text-sm leading-7 text-ink-soft sm:text-[15px]">
               The National Institute of Technology, Arunachal Pradesh was
               inaugurated on 18th August, 2010 as a member of a group of ten new
               NITs established by the Government of India under the Ministry of
@@ -47,7 +47,7 @@ export default function DirectorMessage() {
               nurturing young minds and preparing them for leadership roles in
               technology and innovation.
             </p>
-            <p className="mt-4 text-[15px] leading-7 text-ink-soft">
+            <p className="mt-4 text-sm leading-7 text-ink-soft sm:text-[15px]">
               Our Training &amp; Placement Cell serves as a vital bridge between
               academia and industry. It works tirelessly to ensure that our
               students are well-equipped with the skills, exposure, and
@@ -56,7 +56,7 @@ export default function DirectorMessage() {
               placement records, we are proud of the progress we continue to
               make.
             </p>
-            <p className="mt-4 text-[15px] leading-7 text-ink-soft">
+            <p className="mt-4 text-sm leading-7 text-ink-soft sm:text-[15px]">
               I encourage all stakeholders — students, faculty, and recruiters —
               to actively engage with the T&amp;P Cell and contribute to making
               our placement ecosystem more robust and rewarding.
