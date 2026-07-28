@@ -1,0 +1,190 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/*  Academic Career Nexus — Design Tokens (from DESIGN.md)            */
+/* ------------------------------------------------------------------ */
+@theme {
+  /* Brand */
+  --color-navy: #003366;
+  --color-navy-dark: #001e40;
+  --color-navy-mid: #1f477b;
+  --color-navy-soft: #3a5f94;
+  --color-accent: #fe6500;
+  --color-accent-dark: #a33e00;
+
+  /* Surfaces */
+  --color-canvas: #f1f4fa;
+  --color-surface: #ffffff;
+  --color-surface-low: #edf2ff;
+  --color-surface-mid: #e2eafc;
+  --color-surface-high: #dae5fc;
+
+  /* Ink */
+  --color-ink: #0b1c30;
+  --color-ink-soft: #374151;
+  --color-ink-muted: #6b7280;
+
+  /* Lines */
+  --color-line: #dce3f0;
+  --color-line-strong: #bfc6d4;
+
+  /* Status */
+  --color-success: #047857;
+  --color-success-soft: #ecfdf5;
+  --color-warning: #b45309;
+  --color-warning-soft: #fffbeb;
+
+  /* Radius */
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+
+  /* Fonts */
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-display), var(--font-inter), system-ui, sans-serif;
+}
+
+:root {
+  --font-inter: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background-color: var(--color-canvas);
+  font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Headings use the display family with tight tracking */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+/* Body copy reads better with slightly relaxed measure */
+p {
+  text-wrap: pretty;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Reusable premium utilities                                        */
+/* ------------------------------------------------------------------ */
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* Soft layered elevation for cards */
+.shadow-card {
+  box-shadow: 0 1px 1px rgba(11, 28, 48, 0.03),
+    0 6px 20px -14px rgba(11, 28, 48, 0.18);
+}
+.shadow-card-hover {
+  box-shadow: 0 1px 2px rgba(11, 28, 48, 0.04),
+    0 22px 44px -20px rgba(0, 51, 102, 0.30);
+}
+
+/* Softer subtle card shadow */
+.shadow-soft {
+  box-shadow: 0 0 0 1px rgba(0, 51, 102, 0.06),
+    0 2px 8px -2px rgba(11, 28, 48, 0.10),
+    0 6px 18px -6px rgba(11, 28, 48, 0.08);
+}
+.shadow-soft-hover {
+  box-shadow: 0 0 0 1px rgba(0, 51, 102, 0.10),
+    0 4px 12px -2px rgba(0, 51, 102, 0.12),
+    0 12px 28px -8px rgba(0, 51, 102, 0.10);
+}
+
+/* Glassmorphism for header */
+.glass {
+  background-color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+}
+
+/* Fine dotted grid backdrop */
+.bg-grid {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(255, 255, 255, 0.07) 1px,
+    transparent 0
+  );
+  background-size: 26px 26px;
+}
+
+/* Gradient accent text */
+.text-gradient {
+  background: linear-gradient(92deg, #ffffff 0%, #a7c8ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Eyebrow / overline label */
+.overline {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Logo marquee                                                      */
+/* ------------------------------------------------------------------ */
+@keyframes marquee-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-x 38s linear infinite;
+  will-change: transform;
+}
+
+.marquee-mask:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Soft fade at both edges of the marquee */
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
