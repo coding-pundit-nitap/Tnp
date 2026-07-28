@@ -16,7 +16,7 @@ export default function LoginForm({ message, error, email }: LoginFormProps) {
   >("STUDENT");
 
   const placeholders = {
-    STUDENT: "yourname.dept.23@nitap.ac.in",
+    STUDENT: "banoth.me.23@nitap.ac.in",
     RECRUITER: "yourcompany@mail.com",
     ADMIN: "admin@nitap.ac.in",
   };
