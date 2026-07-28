@@ -1,132 +1,114 @@
-# NIT Arunachal Pradesh - Training & Placement Portal
+# TNP Portal — NIT Arunachal Pradesh
 
-Placement management system for students, recruiters, and administrators.
+Training & Placement Cell portal for NIT Arunachal Pradesh. Manages the end-to-end placement workflow for students, recruiters, and the T&P administration.
 
 ## Tech Stack
 
-- Next.js 16, React 19, TypeScript
-- PostgreSQL + Prisma ORM
-- Tailwind CSS 4
-- Docker (production deployment)
+- **Framework:** Next.js 16 (App Router) + React 19
+- **Language:** TypeScript
+- **Database:** PostgreSQL with Prisma ORM
+- **Styling:** Tailwind CSS 4
+- **Auth:** JWT-based session management
+- **Email:** Nodemailer (SMTP)
+- **Charts:** Recharts
+- **Deployment:** Docker + Nginx
 
-## Production Deployment (Linux Server)
+## Features
+
+- Student registration, profile management, and resume upload
+- Job listings with eligibility-based filtering
+- Application tracking with status updates
+- Recruiter portal for posting jobs and managing interview rounds
+- Admin dashboard with analytics, audit logs, and export tools
+- Email notifications and announcements
+- Placement statistics and department-wise reports
+
+## Getting Started
 
 ### Prerequisites
 
-- Git installed on server
-- Root or sudo access
+- Node.js 20+
+- PostgreSQL 16+
+- npm
 
-### Step 1: Install Docker
-
-The official install script works on Ubuntu, Debian, CentOS, Fedora, RHEL, etc:
-
-```bash
-# Install Docker Engine + Compose plugin (works on any distro)
-curl -fsSL https://get.docker.com | sudo sh
-
-# Add your user to docker group (so you don't need sudo every time)
-sudo usermod -aG docker $USER
-
-# Apply group change (or logout and login again)
-newgrp docker
-
-# Verify it works
-docker --version
-docker compose version
-```
-
-### Step 2: Deploy
+### Setup
 
 ```bash
-# 1. Clone the repo
-git clone <repo-url> /opt/tnp-portal
-cd /opt/tnp-portal
-
-# 2. Configure environment
-cp .env.production .env.production.local
-nano .env.production
-
-# Generate secrets:
-openssl rand -hex 64  # Use for JWT_SECRET
-openssl rand -hex 64  # Use for NEXTAUTH_SECRET
-
-# 3. Deploy
-chmod +x scripts/deploy.sh
-./scripts/deploy.sh
-```
-
-The portal will be running at port 80 (via nginx) or port 3000 (direct).
-
-### Without nginx (simpler setup)
-
-```bash
-# Start containers
-docker compose --env-file .env.production up -d --build
-
-# Run migrations (first time only)
-docker compose exec app npx prisma migrate deploy
-
-# Seed initial admin account (first time only)
-docker compose exec app npx prisma db seed
-```
-
-> If `docker compose` doesn't work, try `docker-compose` (older standalone version).
-
-### Useful Commands
-
-```bash
-# View logs
-docker compose -f docker-compose.prod.yml logs -f app
-
-# Restart
-docker compose -f docker-compose.prod.yml restart
-
-# Stop
-docker compose -f docker-compose.prod.yml down
-
-# Database backup
-docker exec tnp-portal-db pg_dump -U tnp_admin tnp_portal > backup.sql
-
-# Update deployment
-git pull
-docker compose -f docker-compose.prod.yml up -d --build
-docker compose -f docker-compose.prod.yml exec app npx prisma migrate deploy
-```
-
-### SSL/HTTPS Setup
-
-1. Place your SSL certificate files in `nginx/ssl/`:
-   - `cert.pem` (certificate)
-   - `key.pem` (private key)
-2. Uncomment the HTTPS sections in `nginx/nginx.conf`
-3. Restart: `docker compose -f docker-compose.prod.yml restart nginx`
-
-## Local Development
-
-```bash
+# Install dependencies
 npm install
-# Set up .env.local with DATABASE_URL and JWT_SECRET
+
+# Copy env and fill in values
+cp .env.example .env
+
+# Run database migrations
 npx prisma migrate dev
+
+# Seed test data
 npx prisma db seed
+
+# Start dev server
 npm run dev
 ```
 
-### Test Credentials (seeded)
+The app runs at `http://localhost:3000`.
 
-| Role      | Email                 | Password      |
-| --------- | --------------------- | ------------- |
-| Admin     | admin@nitap.ac.in     | admin@123     |
-| Student   | student@nitap.ac.in   | student@123   |
+### Test Accounts (after seeding)
+
+| Role | Email | Password |
+|------|-------|----------|
+| Admin | admin@nitap.ac.in | admin@123 |
+| Student | student@nitap.ac.in | student@123 |
 | Recruiter | recruiter@nitap.ac.in | recruiter@123 |
+
+## Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Production build |
+| `npm run start` | Start production server |
+| `npm run lint` | Run ESLint |
+| `npm run test` | Run tests |
+
+## Docker Deployment
+
+```bash
+# Copy and configure environment
+cp .env.example .env.production
+
+# Build and start
+docker compose --env-file .env.production up -d --build
+
+# Run migrations
+docker compose exec app npx prisma migrate deploy
+
+# Seed admin user
+docker compose exec app npx prisma db seed
+```
+
+For production with Nginx reverse proxy:
+
+```bash
+docker compose -f docker-compose.prod.yml --env-file .env.production up -d --build
+```
 
 ## Project Structure
 
 ```
-app/           → Next.js pages and routes
-actions/       → Server actions
-components/    → Shared UI components
-lib/           → Utilities (auth, prisma, email, etc.)
-prisma/        → Database schema and migrations
-nginx/         → Reverse proxy config
+app/           → Pages and route handlers
+  admin/       → Admin dashboard, jobs, recruiters, settings
+  recruiter/   → Recruiter portal, job management, rounds
+  student/     → Student dashboard, applications, profile
+actions/       → Server actions (business logic)
+components/    → Reusable UI components
+lib/           → Utilities (auth, email, prisma, security)
+prisma/        → Schema, migrations, seed
+nginx/         → Reverse proxy configuration
 scripts/       → Deployment and backup scripts
+tests/         → Test suite
+docs/          → Documentation
 ```
+
+## License
+
+Internal use — NIT Arunachal Pradesh Training & Placement Cell.
