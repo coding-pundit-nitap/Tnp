@@ -1,0 +1,256 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  STUDENT
+  RECRUITER
+}
+
+enum Status {
+  ACTIVE
+  PENDING
+  REJECTED
+}
+
+enum ApplicationStatus {
+  APPLIED
+  SHORTLISTED
+  REJECTED
+  SELECTED
+}
+
+enum RoundResultStatus {
+  PASS
+  FAIL
+  PENDING
+}
+
+enum AuditActionType {
+  CREATE_JOB
+  UPDATE_JOB
+  DELETE_JOB
+  APPROVE_RECRUITER
+  REJECT_RECRUITER
+  CREATE_APPLICATION
+  UPDATE_APPLICATION_STATUS
+  SCHEDULE_INTERVIEW
+  UPDATE_INTERVIEW_RESULT
+  GENERATE_OFFER
+  ACCEPT_OFFER
+  DECLINE_OFFER
+  CREATE_ANNOUNCEMENT
+  UPDATE_ANNOUNCEMENT
+  DELETE_ANNOUNCEMENT
+  UPLOAD_RESUME
+  UPDATE_SETTINGS
+  OTHER
+}
+
+model User {
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  password     String
+  role         Role
+  status       Status   @default(PENDING)
+  emailVerified Boolean  @default(false)
+  emailVerificationCode String?
+  emailVerificationExpiresAt DateTime?
+  emailVerificationSentAt DateTime?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  student              Student?
+  recruiter            Recruiter?
+  notifications        Notification[]
+  announcements        Announcement[]
+  auditLogs            AuditLog[]
+}
+
+model Student {
+  id                  String    @id @default(uuid())
+  userId              String    @unique
+  branch              String
+  year                Int
+  cgpa                Float
+  resumeUrl           String?   // URL to resume
+  profileCompleted    Boolean   @default(false)
+
+  user                User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  applications        Application[]
+  resume              Resume?
+  
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+}
+
+model Recruiter {
+  id            String    @id @default(uuid())
+  userId        String    @unique
+  company       String
+  contactName   String
+  phone         String
+  approved      Boolean   @default(false)
+
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  jobs          Job[]
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Job {
+  id                    String @id @default(uuid())
+  title                 String
+  description           String
+  company               String
+  location              String
+  ctc                   Float
+  minCgpa               Float
+  allowedBranches       String[] // JSON array of branch names
+  allowedYears          Int[] // JSON array of allowed years [1,2,3,4]
+  
+  recruiterId           String
+  recruiter             Recruiter @relation(fields: [recruiterId], references: [id], onDelete: Cascade)
+  applications          Application[]
+  interviewRounds       InterviewRound[]
+  
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+model Application {
+  id                    String @id @default(uuid())
+  jobId                 String
+  studentId             String
+  status                ApplicationStatus @default(APPLIED)
+  matchScore            Float? @default(0) // 0-100 eligibility score
+  
+  job                   Job @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  student               Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  interviewResults      InterviewResult[]
+  offer                 Offer?
+  
+  appliedAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  
+  @@unique([jobId, studentId]) // Prevent duplicate applications
+}
+
+model Announcement {
+  id                    String @id @default(uuid())
+  title                 String
+  message               String
+  createdByAdminId      String
+  
+  createdByAdmin        User @relation(fields: [createdByAdminId], references: [id], onDelete: Cascade)
+  
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+model InterviewRound {
+  id                    String @id @default(uuid())
+  jobId                 String
+  name                  String // "Aptitude Round", "Technical Round", "HR Round"
+  roundNumber           Int
+  date                  DateTime
+  location              String
+  notes                 String?
+  
+  job                   Job @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  results               InterviewResult[]
+  
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+model InterviewResult {
+  id                    String @id @default(uuid())
+  applicationId         String
+  roundId               String
+  status                RoundResultStatus @default(PENDING)
+  remarks               String?
+  
+  application           Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  round                 InterviewRound @relation(fields: [roundId], references: [id], onDelete: Cascade)
+  
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  
+  @@unique([applicationId, roundId]) // One result per round per application
+}
+
+model Offer {
+  id                    String @id @default(uuid())
+  applicationId         String @unique
+  ctcFinal              Float
+  offerLetterUrl        String?
+  accepted              Boolean?
+  
+  application           Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+model Notification {
+  id                    String @id @default(uuid())
+  userId                String
+  title                 String
+  message               String
+  read                  Boolean @default(false)
+  
+  user                  User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  createdAt             DateTime @default(now())
+}
+model Resume {
+  id                    String @id @default(uuid())
+  studentId             String @unique
+  fileUrl               String // URL to uploaded PDF
+  skills                String[] @default([]) // Parsed skills
+  education             Json? // Parsed education details
+  cgpaFromResume        Float?
+  keywords              String[] @default([]) // Extracted keywords for matching
+  parsedAt              DateTime?
+  
+  student               Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+model AuditLog {
+  id                    String @id @default(uuid())
+  userId                String
+  action                AuditActionType
+  entityType            String // "Job", "Application", "User", etc.
+  entityId              String?
+  changes               Json? // Changed fields
+  ipAddress             String?
+  userAgent             String?
+  
+  user                  User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  createdAt             DateTime @default(now())
+}
+
+model SystemSettings {
+  id                    String @id @default("default")
+  placementSeasonYear   Int
+  defaultCgpaCutoff     Float
+  portalOpen            Boolean @default(true)
+  allowedDomains        String[] @default([]) // Allowed email domains for registration
+  emailFrom             String @default("noreply@placement.portal.com")
+  
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
