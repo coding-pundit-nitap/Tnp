@@ -14,7 +14,7 @@ const data = [
     icon: Cpu,
   },
   {
-    dept: "Electronics & Communication Engineering",
+    dept: "Electronics & Communication",
     short: "ECE",
     rate: "80.33%",
     highest: "₹32 LPA",
@@ -60,8 +60,7 @@ export default function DepartmentWisePlacement() {
           subtitle="Branch-level placement performance for the 2024–25 session."
         />
 
-        {/* Department cards */}
-        <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {data.map((d, i) => (
             <motion.div
               key={d.dept}
@@ -69,45 +68,47 @@ export default function DepartmentWisePlacement() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.07, duration: 0.45, ease: "easeOut" }}
               viewport={{ once: true }}
-              className="group rounded-2xl border border-line bg-surface p-7 shadow-soft transition-all duration-300 hover:bg-[#f8faff] hover:shadow-soft-hover"
+              className="group rounded-2xl border border-line bg-surface p-6 sm:p-8 shadow-soft transition-all duration-300 hover:bg-[#f8faff] hover:shadow-soft-hover"
             >
-              <div className="flex items-center gap-3.5">
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-navy text-white">
-                  <d.icon size={20} strokeWidth={2.1} />
+              {/* Header */}
+              <div className="flex items-center gap-3 sm:gap-4">
+                <span className="flex h-11 w-11 sm:h-14 sm:w-14 items-center justify-center rounded-xl bg-navy text-white">
+                  <d.icon size={20} strokeWidth={2} />
                 </span>
                 <div className="min-w-0">
-                  <span className="overline text-ink-muted">{d.short}</span>
-                  <h3 className="mt-0.5 text-[15px] font-semibold leading-snug text-ink">
+                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-navy/60">
+                    {d.short}
+                  </span>
+                  <h3 className="text-sm sm:text-base font-bold text-ink leading-tight">
                     {d.dept}
                   </h3>
                 </div>
               </div>
 
-              <dl className="mt-7 divide-y divide-line border-t border-line">
-                {[
-                  { k: "Placement Rate", v: d.rate, hl: true },
-                  { k: "Highest Package", v: d.highest },
-                  { k: "Average Package", v: d.average },
-                ].map((row) => (
-                  <div
-                    key={row.k}
-                    className="flex items-center justify-between py-3"
-                  >
-                    <dt className="text-sm text-ink-muted">{row.k}</dt>
-                    <dd
-                      className={`text-sm font-bold tabular-nums ${
-                        row.hl ? "text-navy" : "text-ink"
-                      }`}
-                    >
-                      {row.v}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
+              {/* Placement rate - prominent */}
+              <div className="mt-6 sm:mt-7 rounded-xl bg-navy/[0.04] px-4 sm:px-5 py-3 sm:py-4 text-center">
+                <p className="text-2xl sm:text-3xl font-extrabold tabular-nums text-navy">
+                  {d.rate}
+                </p>
+                <p className="mt-1 text-xs sm:text-sm font-medium text-ink-muted">
+                  Placement Rate
+                </p>
+              </div>
+
+              {/* Package stats */}
+              <div className="mt-4 sm:mt-5 grid grid-cols-2 gap-3 sm:gap-4">
+                <div className="rounded-lg bg-canvas px-3 sm:px-4 py-2.5 sm:py-3 text-center">
+                  <p className="text-sm sm:text-base font-bold text-ink">{d.highest}</p>
+                  <p className="mt-0.5 text-[11px] sm:text-xs text-ink-muted">Highest</p>
+                </div>
+                <div className="rounded-lg bg-canvas px-3 sm:px-4 py-2.5 sm:py-3 text-center">
+                  <p className="text-sm sm:text-base font-bold text-ink">{d.average}</p>
+                  <p className="mt-0.5 text-[11px] sm:text-xs text-ink-muted">Average</p>
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>
-
       </div>
     </section>
   );
