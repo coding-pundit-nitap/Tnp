@@ -30,8 +30,7 @@ Thumbs.db
 
 # Secrets and env files
 .env*
-!.env.docker
-!.env.production
+!.env.example
 
 # Debug logs
 npm-debug.log*
