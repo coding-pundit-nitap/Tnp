@@ -10,7 +10,6 @@ const NAV_LINKS = [
   { name: "Placements", href: "#placement-overview" },
   { name: "Departments", href: "#department-placements" },
   { name: "Recruiters", href: "#top-companies" },
-  { name: "Internships", href: "#internships" },
   { name: "Our Team", href: "#tnp-team" },
   { name: "Contact", href: "#contact" },
 ];

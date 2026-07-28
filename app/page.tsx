@@ -7,7 +7,6 @@ import YearWiseTrends from "@/components/landing/YearWiseTrends";
 import DepartmentPlacements from "@/components/landing/DepartmentPlacements";
 import RecruitersGrid from "@/components/landing/RecruitersGrid";
 import PlacedStudents from "@/components/landing/PlacedStudents";
-import InternshipRoadmap from "@/components/landing/InternshipRoadmap";
 import DirectorMessage from "@/components/landing/DirectorMessage";
 import TnpTeam from "@/components/landing/TnpTeam";
 import Footer from "@/components/landing/Footer";
@@ -24,7 +23,6 @@ export default function Home() {
       <DepartmentPlacements />
       <RecruitersGrid />
       <PlacedStudents />
-      <InternshipRoadmap />
       <DirectorMessage />
       <TnpTeam />
       <Footer />
