@@ -1,34 +1,49 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Cpu, Radio, Cog } from "lucide-react";
+import { Cpu, Radio, Cog, Zap, Building } from "lucide-react";
 import SectionHeading from "./SectionHeading";
-import CompanyMarquee from "./CompanyMarquee";
 
 const data = [
   {
     dept: "Computer Science & Engineering",
     short: "CSE",
     rate: "79.68%",
-    highest: "₹58 LPA",
-    average: "₹7.37 LPA",
+    highest: "₹45 LPA",
+    average: "₹15.2 LPA",
     icon: Cpu,
   },
   {
     dept: "Electronics & Communication Engineering",
     short: "ECE",
     rate: "80.33%",
-    highest: "₹18.55 LPA",
-    average: "₹6.92 LPA",
+    highest: "₹32 LPA",
+    average: "₹12.8 LPA",
     icon: Radio,
+  },
+  {
+    dept: "Electrical Engineering",
+    short: "EE",
+    rate: "90.91%",
+    highest: "₹30 LPA",
+    average: "₹12.0 LPA",
+    icon: Zap,
   },
   {
     dept: "Mechanical Engineering",
     short: "ME",
-    rate: "89.79%",
-    highest: "₹15.50 LPA",
-    average: "₹6.40 LPA",
+    rate: "88.70%",
+    highest: "₹28 LPA",
+    average: "₹11.5 LPA",
     icon: Cog,
+  },
+  {
+    dept: "Civil Engineering",
+    short: "CE",
+    rate: "85.40%",
+    highest: "₹25 LPA",
+    average: "₹10.2 LPA",
+    icon: Building,
   },
 ];
 
@@ -46,7 +61,7 @@ export default function DepartmentWisePlacement() {
         />
 
         {/* Department cards */}
-        <div className="mt-16 grid gap-5 lg:grid-cols-3">
+        <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {data.map((d, i) => (
             <motion.div
               key={d.dept}
@@ -93,24 +108,6 @@ export default function DepartmentWisePlacement() {
           ))}
         </div>
 
-        {/* Top recruiters */}
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="mt-8 rounded-2xl border border-line bg-surface py-10 shadow-soft transition-all duration-300 hover:bg-[#f8faff] hover:shadow-soft-hover"
-        >
-          <div className="px-6 text-center">
-            <span className="overline text-accent-dark">Trusted by</span>
-            <h3 className="mt-3 text-xl font-bold tracking-tight text-ink">
-              Our Top Recruiters
-            </h3>
-          </div>
-          <div className="mt-8">
-            <CompanyMarquee />
-          </div>
-        </motion.div>
       </div>
     </section>
   );

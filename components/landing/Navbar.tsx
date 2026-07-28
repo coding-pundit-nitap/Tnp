@@ -7,10 +7,12 @@ import { Menu, X } from "lucide-react";
 
 const NAV_LINKS = [
   { name: "Home", href: "/" },
-  { name: "Why Recruit?", href: "#placement-overview" },
-  { name: "Past Placements", href: "#overall-stats" },
+  { name: "Placements", href: "#placement-overview" },
+  { name: "Departments", href: "#department-placements" },
+  { name: "Recruiters", href: "#top-companies" },
+  { name: "Internships", href: "#internships" },
   { name: "Our Team", href: "#tnp-team" },
-  { name: "Contact Us", href: "#contact" },
+  { name: "Contact", href: "#contact" },
 ];
 
 export default function Navbar() {

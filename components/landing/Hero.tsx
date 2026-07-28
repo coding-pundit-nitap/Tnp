@@ -6,9 +6,9 @@ import { GraduationCap, Briefcase, ArrowRight } from "lucide-react";
 
 const STATS = [
   { value: "₹58", suffix: "LPA", label: "Highest Package" },
-  { value: "95", suffix: "%", label: "Placement Rate" },
-  { value: "100", suffix: "+", label: "Companies" },
-  { value: "295", suffix: "+", label: "Offers Made" },
+  { value: "91.5", suffix: "%", label: "Placement Rate" },
+  { value: "100", suffix: "+", label: "Companies Visited" },
+  { value: "295", suffix: "+", label: "Total Offers" },
 ];
 
 export default function Hero() {

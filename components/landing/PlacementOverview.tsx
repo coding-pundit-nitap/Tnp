@@ -20,8 +20,8 @@ const stats = [
     tint: "bg-navy/[0.07] text-navy-mid",
   },
   {
-    label: "Total Offers",
-    value: "295+",
+    label: "Students Placed",
+    value: "91.5%",
     description: "Session 2024–25",
     icon: Users,
     tint: "bg-navy/[0.07] text-navy-mid",

@@ -10,7 +10,7 @@ const trend: TrendPoint[] = [
   { year: "2021–22", value: 84.5 },
   { year: "2022–23", value: 86.8 },
   { year: "2023–24", value: 89.2 },
-  { year: "2024–25", value: 95.0 },
+  { year: "2024–25", value: 91.5 },
 ];
 
 function Metric({
@@ -72,7 +72,7 @@ export default function OverallPlacementStats() {
               </div>
               <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1.5 text-[12.5px] font-semibold text-emerald-700">
                 <TrendingUp size={14} strokeWidth={2.4} />
-                +12.9 pts
+                +9.4 pts
               </span>
             </div>
 
@@ -90,7 +90,7 @@ export default function OverallPlacementStats() {
             className="flex flex-col gap-6 rounded-2xl border border-line bg-surface p-6 shadow-soft transition-all duration-300 hover:bg-[#f8faff] hover:shadow-soft-hover sm:p-8 lg:col-span-2"
           >
             <div className="grid grid-cols-2 gap-4">
-              <Gauge value={95} label="Students Placed" sublabel="Session 2024–25" />
+              <Gauge value={91.5} label="Students Placed" sublabel="Session 2024–25" />
               <Gauge value={88} label="Internships" sublabel="Summer training" />
             </div>
 
