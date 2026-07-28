@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import SectionHeading from "./SectionHeading";
 
-const companyLogos = [
+const row1 = [
   "https://res.cloudinary.com/dniihkck2/image/upload/v1749454143/WhatsApp_Image_2025-06-09_at_12.41.57_e9f6132c_y7sc6r.jpg",
   "https://res.cloudinary.com/dniihkck2/image/upload/v1749453285/IMG-20250609-WA0026_pd8lea.jpg",
   "https://res.cloudinary.com/dniihkck2/image/upload/v1749408887/WhatsApp_Image_2025-06-08_at_22.55.45_bc6132ae_irjka7.jpg",
@@ -29,6 +29,9 @@ const companyLogos = [
   "https://res.cloudinary.com/dniihkck2/image/upload/v1749403392/WhatsApp_Image_2025-06-08_at_22.39.53_622c9622_kulqqh.jpg",
   "https://res.cloudinary.com/dniihkck2/image/upload/v1749403702/IMG-20250608-WA0036_qxcfyb.jpg",
   "https://res.cloudinary.com/dniihkck2/image/upload/v1749403703/IMG-20250608-WA0037_abn3jj.jpg",
+];
+
+const row2 = [
   "https://res.cloudinary.com/dniihkck2/image/upload/v1749403704/IMG-20250608-WA0038_isno7z.jpg",
   "https://res.cloudinary.com/dniihkck2/image/upload/v1749403704/IMG-20250608-WA0039_v0kjuv.jpg",
   "https://res.cloudinary.com/dniihkck2/image/upload/v1749403706/IMG-20250608-WA0041_beodqc.jpg",
@@ -56,6 +59,36 @@ const companyLogos = [
   "https://res.cloudinary.com/dniihkck2/image/upload/v1749453351/IMG-20250609-WA0023_mmomeu.jpg",
 ];
 
+function LogoItem({ src, index }: { src: string; index: number }) {
+  return (
+    <div className="mx-2.5 flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-line bg-white p-2.5 shadow-sm sm:h-24 sm:w-24 sm:mx-3 sm:p-3 md:h-28 md:w-28">
+      <img
+        src={src}
+        alt={`Recruiting company ${index + 1}`}
+        loading="lazy"
+        className="h-full w-full object-contain"
+      />
+    </div>
+  );
+}
+
+function MarqueeRow({ logos, speed = "40s" }: { logos: string[]; speed?: string }) {
+  const doubled = [...logos, ...logos];
+
+  return (
+    <div className="marquee-mask relative w-full overflow-hidden py-2">
+      <div
+        className="flex w-max items-center"
+        style={{ animation: `marquee-x ${speed} linear infinite` }}
+      >
+        {doubled.map((logo, i) => (
+          <LogoItem key={i} src={logo} index={i % logos.length} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function RecruitersGrid() {
   return (
     <section className="scroll-mt-20 bg-canvas py-20 sm:py-28" id="top-companies">
@@ -65,29 +98,18 @@ export default function RecruitersGrid() {
           title="Top Recruiting Companies 2024-25"
           subtitle="Leading organizations that have recruited our talented students this session."
         />
-
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="mt-14 grid grid-cols-4 gap-3 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10"
-        >
-          {companyLogos.map((logo, i) => (
-            <div
-              key={i}
-              className="group flex aspect-square items-center justify-center overflow-hidden rounded-xl border border-line bg-white p-2 shadow-sm transition-all duration-300 hover:shadow-md hover:scale-105"
-            >
-              <img
-                src={logo}
-                alt={`Recruiting company ${i + 1}`}
-                loading="lazy"
-                className="h-full w-full object-contain"
-              />
-            </div>
-          ))}
-        </motion.div>
       </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 18 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        viewport={{ once: true }}
+        className="mt-14 space-y-4"
+      >
+        <MarqueeRow logos={row1} speed="45s" />
+        <MarqueeRow logos={row2} speed="50s" />
+      </motion.div>
     </section>
   );
 }

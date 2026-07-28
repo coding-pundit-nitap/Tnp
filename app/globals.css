@@ -162,6 +162,10 @@ p {
   animation-play-state: paused;
 }
 
+.marquee-mask:hover > div {
+  animation-play-state: paused;
+}
+
 /* Soft fade at both edges of the marquee */
 .marquee-mask {
   -webkit-mask-image: linear-gradient(
