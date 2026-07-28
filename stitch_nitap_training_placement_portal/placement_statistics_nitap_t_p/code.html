@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Placement Statistics - NIT Arunachal Pradesh</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#dce9ff",
+                        "inverse-surface": "#213145",
+                        "surface": "#f8f9ff",
+                        "surface-variant": "#d3e4fe",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#c3c6d1",
+                        "secondary": "#a33e00",
+                        "primary-container": "#003366",
+                        "on-surface": "#0b1c30",
+                        "on-tertiary-container": "#999c9e",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#d5e3ff",
+                        "primary": "#001e40",
+                        "background": "#f8f9ff",
+                        "on-background": "#0b1c30",
+                        "tertiary": "#1b1f20",
+                        "surface-container-highest": "#d3e4fe",
+                        "tertiary-container": "#303436",
+                        "on-primary-fixed": "#001b3c",
+                        "secondary-fixed-dim": "#ffb596",
+                        "on-primary-fixed-variant": "#1f477b",
+                        "surface-container-lowest": "#ffffff",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#fe6500",
+                        "on-surface-variant": "#43474f",
+                        "on-secondary-fixed": "#360f00",
+                        "surface-bright": "#f8f9ff",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#799dd6",
+                        "outline": "#737780",
+                        "on-secondary-container": "#541d00",
+                        "tertiary-fixed": "#e0e3e5",
+                        "on-secondary-fixed-variant": "#7c2e00",
+                        "inverse-primary": "#a7c8ff",
+                        "surface-container-low": "#eff4ff",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "secondary-fixed": "#ffdbcd",
+                        "surface-container": "#e5eeff",
+                        "primary-fixed-dim": "#a7c8ff",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "on-tertiary-fixed": "#191c1e",
+                        "surface-dim": "#cbdbf5",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#3a5f94"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-padding": "24px",
+                        "sidebar-width": "260px",
+                        "gutter": "16px",
+                        "base": "8px",
+                        "section-gap": "32px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "title-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "title-md": ["18px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: theme('colors.surface'); 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: theme('colors.outline-variant'); 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: theme('colors.outline'); 
+        }
+
+        /* Ambient Shadow for cards */
+        .ambient-shadow {
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased overflow-x-hidden">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-full w-[260px] z-50 bg-surface-container-low/80 backdrop-blur-xl border-r border-outline-variant/20 flex flex-col py-6 px-4 gap-2 hidden md:flex">
+<div class="mb-8 px-2 flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-on-primary font-bold">N</div>
+<div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">Placement Portal</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">NIT Arunachal Pradesh</p>
+</div>
+</div>
+<button class="mb-6 w-full py-3 px-4 bg-secondary text-on-secondary font-title-md text-title-md rounded-lg flex items-center justify-center gap-2 hover:bg-secondary-container transition-colors shadow-sm">
+<span class="material-symbols-outlined">add</span>
+            Post New Job
+        </button>
+<div class="flex-1 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-body-md text-body-md">Home</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">door_open</span>
+<span class="font-body-md text-body-md">Portals</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">work</span>
+<span class="font-body-md text-body-md">Jobs</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg border-l-4 border-secondary text-primary bg-surface-container-highest font-bold transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-weight="fill">insights</span>
+<span class="font-body-md text-body-md">Statistics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-body-md text-body-md">Calendar</span>
+</a>
+</div>
+<div class="mt-auto flex flex-col gap-2 border-t border-outline-variant/20 pt-4">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body-md text-body-md">Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-md text-body-md">Logout</span>
+</a>
+</div>
+</nav>
+<!-- TopNavBar -->
+<header class="fixed top-0 right-0 w-full md:w-[calc(100%-260px)] z-40 bg-surface/70 backdrop-blur-xl border-b border-outline-variant/30 shadow-sm flex justify-between items-center h-16 px-6">
+<div class="flex items-center gap-4 md:hidden">
+<button class="text-on-surface"><span class="material-symbols-outlined">menu</span></button>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary font-bold">T&amp;P NITAP</span>
+</div>
+<div class="hidden md:flex items-center gap-4 bg-surface-container-lowest border border-outline-variant/50 rounded-lg px-3 py-2 w-64 shadow-inner">
+<span class="material-symbols-outlined text-outline">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md font-body-md text-on-surface w-full p-0" placeholder="Search..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-container overflow-hidden border border-outline-variant/30 ml-2">
+<img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbIO6ME4WbdSWMJKIgwpMQ3S1LiNrBsSoMNnpyBoBWksIAHPUw8KWLjYuAfFqelMCmbkKdJtZDc89Yt-KL2693z6iC9t_UC67o4jSNHcFk3_KlCXMAWw0XfnELKMviwQfCa1KODGa2dLTUge3zjbRc-RdXxQ6orxDzQqI1inueXD0DjBh7LFxUOi_3t5gFr62q67oSJrW4VNm0EafSBSo8qAfd5onWixhltk4lBkjmRKZtRih9BnnqbFD52hMQcpecQFCiOQTa-VI"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="pt-[88px] pb-12 px-4 md:px-container-padding md:ml-[260px] min-h-screen">
+<div class="mb-8">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Placement Statistics</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Comprehensive insights and year-over-year performance metrics for the graduating batch.</p>
+</div>
+<!-- Key Metrics Bento -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-section-gap">
+<!-- Metric 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-outline-variant/30 ambient-shadow hover:-translate-y-1 transition-transform duration-300">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">currency_rupee</span>
+</div>
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +12%
+                    </span>
+</div>
+<h3 class="font-body-md text-body-md text-on-surface-variant mb-1">Highest Package</h3>
+<p class="font-display-lg text-[32px] leading-tight font-bold text-on-surface">32.5 <span class="text-body-lg font-body-lg text-outline">LPA</span></p>
+</div>
+<!-- Metric 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-outline-variant/30 ambient-shadow hover:-translate-y-1 transition-transform duration-300">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +8%
+                    </span>
+</div>
+<h3 class="font-body-md text-body-md text-on-surface-variant mb-1">Average Package</h3>
+<p class="font-display-lg text-[32px] leading-tight font-bold text-on-surface">11.2 <span class="text-body-lg font-body-lg text-outline">LPA</span></p>
+</div>
+<!-- Metric 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-outline-variant/30 ambient-shadow hover:-translate-y-1 transition-transform duration-300">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">group</span>
+</div>
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +15%
+                    </span>
+</div>
+<h3 class="font-body-md text-body-md text-on-surface-variant mb-1">Placement Rate</h3>
+<p class="font-display-lg text-[32px] leading-tight font-bold text-on-surface">94<span class="text-body-lg font-body-lg text-outline">%</span></p>
+</div>
+<!-- Metric 4 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-outline-variant/30 ambient-shadow hover:-translate-y-1 transition-transform duration-300">
+<div class="flex justify-between items-start mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">business</span>
+</div>
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-outline bg-surface px-2 py-1 rounded-full">
+<span class="material-symbols-outlined text-[14px]">horizontal_rule</span> 0%
+                    </span>
+</div>
+<h3 class="font-body-md text-body-md text-on-surface-variant mb-1">Total Recruiters</h3>
+<p class="font-display-lg text-[32px] leading-tight font-bold text-on-surface">120<span class="text-body-lg font-body-lg text-outline">+</span></p>
+</div>
+</div>
+<!-- Main Charts Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-section-gap">
+<!-- Branch-wise Bar Chart -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-xl border border-outline-variant/30 ambient-shadow p-6">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface">Branch-wise Average Package</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Comparison across all engineering disciplines</p>
+</div>
+<select class="bg-surface border-outline-variant/50 rounded-lg text-body-md font-body-md text-on-surface focus:ring-primary focus:border-primary">
+<option>2023-24</option>
+<option>2022-23</option>
+</select>
+</div>
+<div class="relative h-[300px] w-full">
+<canvas id="branchChart"></canvas>
+</div>
+</div>
+<!-- Industry Pie Chart -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 ambient-shadow p-6">
+<h3 class="font-title-md text-title-md text-on-surface mb-2">Recruiter Demographics</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Distribution by industry sector</p>
+<div class="relative h-[240px] w-full flex justify-center">
+<canvas id="industryChart"></canvas>
+</div>
+<div class="mt-4 grid grid-cols-2 gap-2">
+<div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-primary"></span><span class="font-label-sm text-label-sm text-on-surface-variant">IT / Software (45%)</span></div>
+<div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-secondary"></span><span class="font-label-sm text-label-sm text-on-surface-variant">Core Engg (25%)</span></div>
+<div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-primary-fixed-dim"></span><span class="font-label-sm text-label-sm text-on-surface-variant">Consulting (15%)</span></div>
+<div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-outline-variant"></span><span class="font-label-sm text-label-sm text-on-surface-variant">Others (15%)</span></div>
+</div>
+</div>
+</div>
+<!-- Star Recruiters & YoY Growth -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- YoY Growth Line Chart -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 ambient-shadow p-6">
+<h3 class="font-title-md text-title-md text-on-surface mb-2">Year-on-Year Growth</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Tracking average package trends over 5 years</p>
+<div class="relative h-[250px] w-full">
+<canvas id="yoyChart"></canvas>
+</div>
+</div>
+<!-- Star Recruiters Cards -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 ambient-shadow p-6 flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h3 class="font-title-md text-title-md text-on-surface">Star Recruiters</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Top companies by offers made</p>
+</div>
+<button class="text-primary font-label-sm text-label-sm hover:underline">View All</button>
+</div>
+<div class="flex-1 flex flex-col gap-3">
+<div class="flex items-center justify-between p-3 rounded-lg bg-surface hover:bg-surface-container transition-colors border border-outline-variant/20">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded bg-white border border-outline-variant/30 flex items-center justify-center p-2 shadow-sm">
+<!-- Placeholder for logo -->
+<span class="font-bold text-primary text-xl">G</span>
+</div>
+<div>
+<h4 class="font-title-md text-[16px] text-on-surface">Google</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">IT / Software</p>
+</div>
+</div>
+<div class="text-right">
+<span class="block font-title-md text-[16px] text-on-surface">15 Offers</span>
+<span class="block font-label-sm text-label-sm text-primary">Avg: 25 LPA</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg bg-surface hover:bg-surface-container transition-colors border border-outline-variant/20">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded bg-white border border-outline-variant/30 flex items-center justify-center p-2 shadow-sm">
+<span class="font-bold text-secondary text-xl">M</span>
+</div>
+<div>
+<h4 class="font-title-md text-[16px] text-on-surface">Microsoft</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">IT / Software</p>
+</div>
+</div>
+<div class="text-right">
+<span class="block font-title-md text-[16px] text-on-surface">12 Offers</span>
+<span class="block font-label-sm text-label-sm text-primary">Avg: 22 LPA</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg bg-surface hover:bg-surface-container transition-colors border border-outline-variant/20">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded bg-white border border-outline-variant/30 flex items-center justify-center p-2 shadow-sm">
+<span class="font-bold text-tertiary text-xl">L&amp;T</span>
+</div>
+<div>
+<h4 class="font-title-md text-[16px] text-on-surface">Larsen &amp; Toubro</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Core Engineering</p>
+</div>
+</div>
+<div class="text-right">
+<span class="block font-title-md text-[16px] text-on-surface">24 Offers</span>
+<span class="block font-label-sm text-label-sm text-primary">Avg: 8.5 LPA</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Chart.js global defaults
+        Chart.defaults.font.family = 'Inter, sans-serif';
+        Chart.defaults.color = '#737780'; // outline color
+        Chart.defaults.scale.grid.color = '#e2e8f0'; // subtle grid lines
+
+        // Branch-wise Bar Chart
+        const ctxBranch = document.getElementById('branchChart').getContext('2d');
+        new Chart(ctxBranch, {
+            type: 'bar',
+            data: {
+                labels: ['CSE', 'ECE', 'ME', 'CE', 'EE'],
+                datasets: [{
+                    label: 'Average Package (LPA)',
+                    data: [14.5, 11.2, 8.5, 7.8, 9.2],
+                    backgroundColor: '#003366', // primary-container
+                    borderRadius: 6,
+                    barPercentage: 0.6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: '#213145', // inverse-surface
+                        titleFont: { size: 14, weight: 600 },
+                        bodyFont: { size: 14 },
+                        padding: 12,
+                        cornerRadius: 8
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { borderDash: [4, 4] },
+                        title: { display: true, text: 'LPA', font: { size: 12, weight: 500 } }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // Industry Pie Chart
+        const ctxIndustry = document.getElementById('industryChart').getContext('2d');
+        new Chart(ctxIndustry, {
+            type: 'doughnut',
+            data: {
+                labels: ['IT / Software', 'Core Engg', 'Consulting', 'Others'],
+                datasets: [{
+                    data: [45, 25, 15, 15],
+                    backgroundColor: [
+                        '#001e40', // primary
+                        '#a33e00', // secondary
+                        '#a7c8ff', // primary-fixed-dim
+                        '#c3c6d1'  // outline-variant
+                    ],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: '#213145',
+                        padding: 12,
+                        cornerRadius: 8
+                    }
+                }
+            }
+        });
+
+        // YoY Growth Line Chart
+        const ctxYoY = document.getElementById('yoyChart').getContext('2d');
+        new Chart(ctxYoY, {
+            type: 'line',
+            data: {
+                labels: ['2020', '2021', '2022', '2023', '2024'],
+                datasets: [{
+                    label: 'Avg Package (LPA)',
+                    data: [6.5, 7.2, 8.8, 10.5, 11.2],
+                    borderColor: '#003366', // primary-container
+                    backgroundColor: 'rgba(0, 51, 102, 0.1)',
+                    borderWidth: 3,
+                    pointBackgroundColor: '#ffffff',
+                    pointBorderColor: '#003366',
+                    pointBorderWidth: 2,
+                    pointRadius: 4,
+                    pointHoverRadius: 6,
+                    fill: true,
+                    tension: 0.4 // smooth curve
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        grid: { borderDash: [4, 4] }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+    </script>
+</body></html>
