@@ -1,11 +1,12 @@
-// @ts-nocheck
 "use server";
 
-import { cookies } from "next/headers";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 export async function logoutAction() {
-  const cookieStore = await cookies();
-  cookieStore.delete("auth");
+  await auth.api.signOut({
+    headers: await headers(),
+  });
   redirect("/login");
 }

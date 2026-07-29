@@ -1,4 +1,4 @@
-import { getSession } from "@/lib/auth";
+import { getSession } from "@/lib/session";
 import { redirect } from "next/navigation";
 import { getJobApplications, getJobDetail } from "@/actions/job";
 import Link from "next/link";

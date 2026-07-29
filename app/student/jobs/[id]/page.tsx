@@ -1,4 +1,4 @@
-import { getSession } from "@/lib/auth";
+import { getSession } from "@/lib/session";
 import { redirect } from "next/navigation";
 import { getJobDetail } from "@/actions/job";
 import { prisma } from "@/lib/prisma";

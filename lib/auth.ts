@@ -1,38 +1,35 @@
-import { cookies } from "next/headers";
-import jwt from "jsonwebtoken";
+import { betterAuth } from "better-auth";
+import { prismaAdapter } from "better-auth/adapters/prisma";
+import { prisma } from "./prisma";
 
-export interface SessionUser {
-  id: string;
-  role: "STUDENT" | "RECRUITER" | "ADMIN";
-}
+export const auth = betterAuth({
+  database: prismaAdapter(prisma, {
+    provider: "postgresql",
+  }),
+  emailAndPassword: {
+    enabled: true,
+    minPasswordLength: 8,
+  },
+  session: {
+    expiresIn: 60 * 60 * 24 * 7, // 7 days
+    updateAge: 60 * 60 * 24, // update session every 24 hours
+  },
+  user: {
+    additionalFields: {
+      role: {
+        type: "string",
+        required: false,
+        defaultValue: "STUDENT",
+        input: true,
+      },
+      status: {
+        type: "string",
+        required: false,
+        defaultValue: "PENDING",
+        input: true,
+      },
+    },
+  },
+});
 
-export async function getSession(): Promise<SessionUser | null> {
-  try {
-    const cookieStore = await cookies();
-    const token = cookieStore.get("auth")?.value;
-    if (!token) {
-      return null;
-    }
-
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as SessionUser;
-    return decoded;
-  } catch (error: any) {
-    return null;
-  }
-}
-
-export async function requireAuth(
-  allowedRoles?: string[],
-): Promise<SessionUser> {
-  const session = await getSession();
-
-  if (!session) {
-    throw new Error("Unauthorized");
-  }
-
-  if (allowedRoles && !allowedRoles.includes(session.role)) {
-    throw new Error("Forbidden");
-  }
-
-  return session;
-}
+export type Session = typeof auth.$Infer.Session;

@@ -1,4 +1,4 @@
-import { getSession } from "@/lib/auth";
+import { getSession } from "@/lib/session";
 import { logoutAction } from "@/actions/logout";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";

@@ -1,7 +1,7 @@
 // @ts-nocheck
 "use server";
 
-import { getSession } from "@/lib/auth";
+import { getSession } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
 import { logInfo, logError, logPermission, createTimer } from "@/lib/logger";
 

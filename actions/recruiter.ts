@@ -1,9 +1,10 @@
 // @ts-nocheck
 "use server";
 
-import { getSession } from "@/lib/auth";
+import { getSession } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
-import bcrypt from "bcryptjs";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import { z } from "zod";
 
 const registerRecruiterSchema = z.object({
@@ -27,35 +28,37 @@ export async function registerRecruiter(formData: Record<string, any>) {
       return { success: false, error: "Email already registered" };
     }
 
-    // Hash password
-    const hashedPassword = await bcrypt.hash(validated.password, 10);
-
-    // Create user and recruiter
-    const user = await prisma.user.create({
-      data: {
+    // Create user via Better Auth
+    const result = await auth.api.signUpEmail({
+      body: {
         name: validated.contactName,
         email: validated.email,
-        password: hashedPassword,
+        password: validated.password,
         role: "RECRUITER",
-        emailVerified: true,
-        recruiter: {
-          create: {
-            company: validated.company,
-            contactName: validated.contactName,
-            phone: validated.phone,
-            approved: false,
-          },
-        },
+        status: "PENDING",
       },
-      include: {
-        recruiter: true,
+      headers: await headers(),
+    });
+
+    if (!result || !result.user) {
+      return { success: false, error: "Registration failed" };
+    }
+
+    // Create recruiter profile
+    await prisma.recruiter.create({
+      data: {
+        userId: result.user.id,
+        company: validated.company,
+        contactName: validated.contactName,
+        phone: validated.phone,
+        approved: false,
       },
     });
 
     return {
       success: true,
       message: "Registration submitted. Please wait for admin approval.",
-      data: user,
+      data: result.user,
     };
   } catch (error: any) {
     console.error("Recruiter registration error:", error);
