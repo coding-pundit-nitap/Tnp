@@ -68,7 +68,7 @@ export default function PlacedStudents() {
         <SectionHeading
           eyebrow="Achievers"
           title="Notable Placements"
-          subtitle="Celebrating top achievers from the 2024–25 placement season."
+          subtitle="Celebrating top achievers from recent placement seasons."
         />
 
         <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

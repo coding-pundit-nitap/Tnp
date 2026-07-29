@@ -4,18 +4,18 @@ import { motion } from "framer-motion";
 import SectionHeading from "./SectionHeading";
 
 const yearData = [
-  { year: "2024-25", rate: "91.5%", highlight: true },
+  { year: "2025-26", rate: "90%", highlight: true },
+  { year: "2024-25", rate: "91.5%" },
   { year: "2023-24", rate: "89.2%" },
   { year: "2022-23", rate: "86.8%" },
   { year: "2021-22", rate: "84.5%" },
-  { year: "2020-21", rate: "82.1%" },
 ];
 
 const highlights = [
-  { label: "Highest Package", value: "₹58 LPA" },
-  { label: "Average Package", value: "₹7.37 LPA" },
-  { label: "Total Offers", value: "295+" },
-  { label: "Companies Visited", value: "100+" },
+  { label: "Highest CTC", value: "₹17 LPA" },
+  { label: "Average CTC", value: "₹8.12 LPA" },
+  { label: "Min CTC", value: "₹4.2 LPA" },
+  { label: "Recruiters", value: "60+" },
 ];
 
 export default function YearWiseTrends() {

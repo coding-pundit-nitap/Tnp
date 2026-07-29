@@ -6,30 +6,30 @@ import SectionHeading from "./SectionHeading";
 
 const stats = [
   {
-    label: "Highest Package",
-    value: "₹58L",
-    description: "Microsoft · 2024–25",
+    label: "Highest CTC",
+    value: "₹17L",
+    description: "ECE · 2025–26",
     icon: TrendingUp,
     tint: "bg-navy/10 text-navy",
   },
   {
-    label: "Average Package",
-    value: "₹7.37L",
+    label: "Average CTC",
+    value: "₹8.12L",
     description: "Across all branches",
     icon: Award,
     tint: "bg-navy/[0.07] text-navy-mid",
   },
   {
     label: "Students Placed",
-    value: "91.5%",
-    description: "Session 2024–25",
+    value: "90%",
+    description: "Session 2025–26",
     icon: Users,
     tint: "bg-navy/[0.07] text-navy-mid",
   },
   {
-    label: "Companies Visited",
-    value: "100+",
-    description: "Leading recruiters",
+    label: "Recruiters",
+    value: "60+",
+    description: "Leading organizations",
     icon: Building2,
     tint: "bg-navy/10 text-navy",
   },
@@ -45,7 +45,7 @@ export default function PlacementOverview() {
         <SectionHeading
           eyebrow="Highlights"
           title="Placement at a Glance"
-          subtitle="Key achievements from the academic year 2024–25."
+          subtitle="Key achievements from the academic year 2025–26."
         />
 
         <div className="mt-16 grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-5">

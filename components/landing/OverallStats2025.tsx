@@ -11,6 +11,7 @@ const trend: TrendPoint[] = [
   { year: "2022–23", value: 86.8 },
   { year: "2023–24", value: 89.2 },
   { year: "2024–25", value: 91.5 },
+  { year: "2025–26", value: 90.0 },
 ];
 
 function Metric({
@@ -49,7 +50,7 @@ export default function OverallPlacementStats() {
         <SectionHeading
           eyebrow="Statistics"
           title="Overall Placement Statistics"
-          subtitle="A consolidated view of performance across the academic year 2024–25."
+          subtitle="A consolidated view of performance across the academic year 2025–26."
         />
 
         <div className="mt-16 grid gap-5 lg:grid-cols-5">
@@ -90,15 +91,15 @@ export default function OverallPlacementStats() {
             className="flex flex-col gap-6 rounded-2xl border border-line bg-surface p-6 shadow-soft transition-all duration-300 hover:bg-[#f8faff] hover:shadow-soft-hover sm:p-8 lg:col-span-2"
           >
             <div className="grid grid-cols-2 gap-4">
-              <Gauge value={91.5} label="Students Placed" sublabel="Session 2024–25" />
+              <Gauge value={90} label="Students Placed" sublabel="Session 2025–26" />
               <Gauge value={88} label="Internships" sublabel="Summer training" />
             </div>
 
             <div className="grid grid-cols-1 gap-3 border-t border-line pt-6 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
               <Metric
                 icon={IndianRupee}
-                value="₹58L"
-                label="Highest Package"
+                value="₹17L"
+                label="Highest CTC"
                 sublabel="B.Tech, per annum"
               />
               <Metric

@@ -5,10 +5,10 @@ import Link from "next/link";
 import { GraduationCap, Briefcase, ArrowRight } from "lucide-react";
 
 const STATS = [
-  { value: "₹58", suffix: "LPA", label: "Highest Package" },
-  { value: "91.5", suffix: "%", label: "Placement Rate" },
-  { value: "100", suffix: "+", label: "Companies Visited" },
-  { value: "295", suffix: "+", label: "Total Offers" },
+  { value: "₹17", suffix: "LPA", label: "Highest Package" },
+  { value: "90", suffix: "%", label: "Placement Rate" },
+  { value: "60", suffix: "+", label: "Recruiters" },
+  { value: "₹8.12", suffix: "LPA", label: "Average CTC" },
 ];
 
 export default function Hero() {
